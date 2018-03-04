@@ -33,14 +33,21 @@ app.get('/', function homepage(req, res) {
 
 // get all todos
 app.get('/api/todos', function index(req, res) {
-  console.log('handling request for GET /api/todos');
-  console.log('- request params:', req.params);
-  console.log('- query string params:', req.query);
-  console.log('- request body:', req.body);
+  db.Todo.find({}, function(errrrrr, data) {
+    res.json({todos: data});
+  })
 });
 
 // create new todo
 app.post('/api/todos', function create(req, res) {
+  //console.log(req.body);
+  // create todo in database using req.body
+
+  db.Todo.create(req.body, function(err, data) {
+    res.json(data);
+  })
+
+  // send todo back as the response
 
 });
 
